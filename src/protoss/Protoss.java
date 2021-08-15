@@ -15,6 +15,8 @@ package protoss;
     - self-intro
  */
 
+import common.types.types;
+
 // Superclass for Protoss unit
 public abstract class Protoss {
     // Todo: declare AttackBehaivor Ineterface
@@ -25,8 +27,8 @@ public abstract class Protoss {
     private int shield;
     private boolean hasSkill;
     private boolean hasAttack;
-
-    // Todo: enum for unit type
+    private types.UNIT_TYPES unitType;
+    private types.ATTACK_TYPES attackType;
 
     /*
     You would define a constructor in an abstract classif you are in one of these situations:
