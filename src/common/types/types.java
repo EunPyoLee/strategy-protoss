@@ -13,9 +13,29 @@ public class types {
     }
 
     public enum ATTACK_TYPES {
-        NONE,
-        NORMAL,
-        CONCUSSION,
-        EXPLOSIVE
+        NONE{
+            @Override
+            public String toString() {
+                return "None";
+            }
+        },
+        NORMAL{
+            @Override
+            public String toString() {
+                return "Normal";
+            }
+        },
+        CONCUSSION{
+            @Override
+            public String toString() {
+                return "Concussion";
+            }
+        },
+        EXPLOSIVE{
+            @Override
+            public String toString() {
+                return "Explosive";
+            }
+        }
     }
 }

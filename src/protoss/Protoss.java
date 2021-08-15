@@ -15,11 +15,12 @@ package protoss;
     - self-intro
  */
 
+import common.interfaces.IAttack;
 import common.types.types;
 
 // Superclass for Protoss unit
 public abstract class Protoss {
-    // Todo: declare AttackBehaivor Ineterface
+    IAttack attackBehavior;
     // Todo: declare SkillBehavior Interface and define array of them
 
     private String name;
@@ -51,7 +52,15 @@ public abstract class Protoss {
 
     public abstract void selfIntro();
 
-    // Todo: attack
-    // Todo:
+    public void performAttack() {
+        if(!this.hasAttack){
+            System.out.println("This unit does not have attack");
+        }else {
+            System.out.printf("Attack Type: %v\n", attackType);
+            this.attackBehavior.attack();
+        }
+    }
+
+    // Todo: skills
 
 }
