@@ -15,13 +15,17 @@ package protoss;
     - self-intro
  */
 
+import common.exceptions.skill_exception.SkillExceptions;
 import common.interfaces.IAttack;
+import common.interfaces.ISkill;
 import common.types.types;
+
+import java.util.List;
 
 // Superclass for Protoss unit
 public abstract class Protoss {
     IAttack attackBehavior;
-    // Todo: declare SkillBehavior Interface and define array of them
+    List<ISkill> skillBehaviors;
 
     private String name;
     private int hp;
@@ -52,15 +56,41 @@ public abstract class Protoss {
 
     public abstract void selfIntro();
 
+    public void skillIntro(){
+        System.out.println("[Skills]");
+        if(!this.hasSkill){
+            System.out.println("None");
+        } else{
+            for(int i =0; i < skillBehaviors.size(); ++i){
+                System.out.printf("%d - %s\n", i, skillBehaviors.get(i).toString());
+            }
+        }
+    }
+
+    public void attackIntro(){
+        System.out.println("[Attack]");
+        if(!this.hasSkill){
+            System.out.println(attackType);
+            return;
+        }
+
+        System.out.printf("Attack Type: %s\n", attackType.toString());
+        System.out.printf("Weapon: %s\n", attackBehavior.toString());
+    }
+
     public void performAttack() {
         if(!this.hasAttack){
-            System.out.println("This unit does not have attack");
+            System.out.printf("%s does not have attack\n", name);
         }else {
-            System.out.printf("Attack Type: %v\n", attackType);
+            System.out.printf("%s attacks\n Attack Type: %v\n", name, attackType);
             this.attackBehavior.attack();
         }
     }
 
-    // Todo: skills
-
+    public void performSkill(int skillIdx) throws SkillExceptions{
+        if(skillIdx >= skillBehaviors.size()){
+            throw new SkillExceptions.OutOfRange();
+        }
+        System.out.println(skillBehaviors.get(skillIdx));
+    }
 }

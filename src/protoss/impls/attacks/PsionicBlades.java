@@ -1,4 +1,4 @@
-package protoss.impls;
+package protoss.impls.attacks;
 
 import common.interfaces.IAttack;
 
@@ -7,5 +7,10 @@ public class PsionicBlades implements IAttack {
     @Override
     public void attack() {
         System.out.println("Psionic Blades Attack");
+    }
+
+    @Override
+    public String toString() {
+        return "Psionic Blades";
     }
 }
