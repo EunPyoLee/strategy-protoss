@@ -24,16 +24,16 @@ import java.util.List;
 
 // Superclass for Protoss unit
 public abstract class Protoss {
-    IAttack attackBehavior;
-    List<ISkill> skillBehaviors;
+    protected IAttack attackBehavior;
+    protected List<ISkill> skillBehaviors;
 
-    private String name;
-    private int hp;
-    private int shield;
-    private boolean hasSkill;
-    private boolean hasAttack;
-    private types.UNIT_TYPES unitType;
-    private types.ATTACK_TYPES attackType;
+    protected String name;
+    protected int hp;
+    protected int shield;
+    protected boolean hasSkill;
+    protected boolean hasAttack;
+    protected types.UNIT_TYPES unitType;
+    protected types.ATTACK_TYPES attackType;
 
     /*
     You would define a constructor in an abstract classif you are in one of these situations:
@@ -51,10 +51,9 @@ public abstract class Protoss {
      */
     protected Protoss () {
         System.out.println("For AIUR!");
-        this.selfIntro();
     }
 
-    public abstract void selfIntro();
+    protected abstract void selfIntro();
 
     public void skillIntro(){
         System.out.println("[Skills]");
@@ -66,6 +65,38 @@ public abstract class Protoss {
             }
         }
     }
+
+    protected abstract void setName(String name);
+
+    protected abstract void setHP(int hp);
+
+    protected abstract void setShield(int shield);
+
+    protected abstract void setHasSkill(boolean hasSkill);
+
+    protected abstract void setHasAttack(boolean hasAttack);
+
+    protected abstract void setUnitType(types.UNIT_TYPES ut);
+
+    protected abstract void setAttackType(types.ATTACK_TYPES at);
+
+    protected abstract void setAttackBehavior(IAttack attack);
+
+    protected abstract void setSkillBehaviors(List<ISkill> skills);
+
+    protected abstract String getName();
+
+    protected abstract int getHP();
+
+    protected abstract int getShield();
+
+    protected abstract boolean isHasSkill();
+
+    protected abstract boolean isHasAttack();
+
+    protected abstract types.UNIT_TYPES getUnitType();
+
+    protected abstract types.ATTACK_TYPES getAttackType();
 
     public void attackIntro(){
         System.out.println("[Attack]");
@@ -82,7 +113,7 @@ public abstract class Protoss {
         if(!this.hasAttack){
             System.out.printf("%s does not have attack\n", name);
         }else {
-            System.out.printf("%s attacks\n Attack Type: %v\n", name, attackType);
+            System.out.printf("%s attacks\n Attack Type: %s\n", name, attackType);
             this.attackBehavior.attack();
         }
     }
