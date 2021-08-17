@@ -81,45 +81,92 @@ public abstract class Protoss {
         }
     }
 
-    protected abstract void setName(String name);
+    protected void setName(String name){
+        this.name = name;
+    }
 
-    protected abstract void setHP(int hp);
+    protected void setHP(int hp){
+        this.hp = hp;
+    }
 
-    protected abstract void setEnergy(int energy);
+    protected void setShield(int shield){
+        this.shield = shield;
+    }
 
-    protected abstract void setShield(int shield);
+    protected void setHasSkill(boolean hasSkill){
+        this.hasSkill = hasSkill;
+    }
 
-    protected abstract void setHasSkill(boolean hasSkill);
+    protected void setHasAttack(boolean hasAttack){
+        this.hasAttack = hasAttack;
+    }
 
-    protected abstract void setHasAttack(boolean hasAttack);
+    protected void setHasEnergy(boolean hasEnergy){
+        this.hasEnergy = hasEnergy;
+    }
 
-    protected abstract void setHasEnergy(boolean hasEnergy);
+    protected void setUnitType(types.UNIT_TYPES ut){
+        this.unitType = ut;
+    }
 
-    protected abstract void setUnitType(types.UNIT_TYPES ut);
+    protected void setAttackType(types.ATTACK_TYPES at){
+        this.attackType = at;
+    }
 
-    protected abstract void setAttackType(types.ATTACK_TYPES at);
+    protected void setEnergy(int energy){
+        this.energy = energy;
+    }
 
-    protected abstract void setAttackBehavior(IAttack attack);
+    protected void setAttackBehavior(IAttack attack){
+        attackBehavior = attack;
+    }
 
-    protected abstract void setSkillBehaviors(List<ISkill> skills);
+    protected void setSkillBehaviors(List<ISkill> skills){
+        skillBehaviors = skills;
+    }
 
-    public abstract String getName();
+    public String getName(){
+        return name;
+    }
 
-    public abstract int getHP();
+    public int getHP(){
+        return hp;
+    }
 
-    public abstract int getEnergy() throws EnergyException;
+    public int getEnergy() throws EnergyException {
+        if(!hasEnergy) {
+            throw new EnergyException.NullEnergy();
+        }
+        return energy;
+    }
 
-    public abstract int getShield();
+    public int getShield(){
+        return shield;
+    }
 
-    public abstract boolean isHasSkill();
+    public int getNumSkills() {
+        return skillBehaviors.size();
+    }
 
-    public abstract boolean isHasAttack();
+    public boolean isHasSkill() {
+        return hasSkill;
+    }
 
-    public abstract boolean isHasEnergy();
+    public boolean isHasAttack(){
+        return hasAttack;
+    }
 
-    public abstract types.UNIT_TYPES getUnitType();
+    public boolean isHasEnergy(){
+        return hasEnergy;
+    }
 
-    public abstract types.ATTACK_TYPES getAttackType();
+    public types.UNIT_TYPES getUnitType(){
+        return unitType;
+    }
+
+    public types.ATTACK_TYPES getAttackType(){
+        return attackType;
+    }
 
     public void attackIntro(){
         System.out.println("[Attack]");
@@ -136,15 +183,16 @@ public abstract class Protoss {
         if(!this.hasAttack){
             System.out.printf("%s does not have attack\n", name);
         }else {
-            System.out.printf("%s attacks\n Attack Type: %s\n", name, attackType);
+            System.out.printf("%s attacks\nAttack Type: %s\n", name, attackType);
             this.attackBehavior.attack();
         }
     }
 
     public void performSkill(int skillIdx) throws SkillExceptions{
         if(skillIdx >= skillBehaviors.size()){
+            System.out.printf("%s does not have a skill\n", name);
             throw new SkillExceptions.OutOfRange();
         }
-        System.out.println(skillBehaviors.get(skillIdx));
+        System.out.printf("%s uses the following skill: %s\n", name, skillBehaviors.get(skillIdx));
     }
 }
