@@ -84,19 +84,19 @@ public abstract class Protoss {
 
     protected abstract void setSkillBehaviors(List<ISkill> skills);
 
-    protected abstract String getName();
+    public abstract String getName();
 
-    protected abstract int getHP();
+    public abstract int getHP();
 
-    protected abstract int getShield();
+    public abstract int getShield();
 
-    protected abstract boolean isHasSkill();
+    public abstract boolean isHasSkill();
 
-    protected abstract boolean isHasAttack();
+    public abstract boolean isHasAttack();
 
-    protected abstract types.UNIT_TYPES getUnitType();
+    public abstract types.UNIT_TYPES getUnitType();
 
-    protected abstract types.ATTACK_TYPES getAttackType();
+    public abstract types.ATTACK_TYPES getAttackType();
 
     public void attackIntro(){
         System.out.println("[Attack]");
