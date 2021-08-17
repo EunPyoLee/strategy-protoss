@@ -15,6 +15,7 @@ package protoss;
     - self-intro
  */
 
+import common.exceptions.energy_exception.EnergyException;
 import common.exceptions.skill_exception.SkillExceptions;
 import common.interfaces.IAttack;
 import common.interfaces.ISkill;
@@ -30,6 +31,8 @@ public abstract class Protoss {
     protected String name;
     protected int hp;
     protected int shield;
+    protected int energy;
+    protected boolean hasEnergy;
     protected boolean hasSkill;
     protected boolean hasAttack;
     protected types.UNIT_TYPES unitType;
@@ -53,7 +56,19 @@ public abstract class Protoss {
         System.out.println("For AIUR!");
     }
 
-    protected abstract void selfIntro();
+    public void selfIntro() {
+        System.out.printf("[Name]: %s\n", this.getName());
+        System.out.printf("[Shield/HP]: %d/%d\n", this.getShield(),this.getHP());
+        try{
+            int energy = this.getEnergy();
+            System.out.printf("[Energy]: %d\n", energy);
+        } catch (EnergyException e){
+            System.out.println("[Energy]: NULL");
+        }
+        System.out.printf("[Unit Type]: %s\n", this.getUnitType());
+        this.attackIntro();
+        this.skillIntro();
+    }
 
     public void skillIntro(){
         System.out.println("[Skills]");
@@ -70,11 +85,15 @@ public abstract class Protoss {
 
     protected abstract void setHP(int hp);
 
+    protected abstract void setEnergy(int energy);
+
     protected abstract void setShield(int shield);
 
     protected abstract void setHasSkill(boolean hasSkill);
 
     protected abstract void setHasAttack(boolean hasAttack);
+
+    protected abstract void setHasEnergy(boolean hasEnergy);
 
     protected abstract void setUnitType(types.UNIT_TYPES ut);
 
@@ -88,11 +107,15 @@ public abstract class Protoss {
 
     public abstract int getHP();
 
+    public abstract int getEnergy() throws EnergyException;
+
     public abstract int getShield();
 
     public abstract boolean isHasSkill();
 
     public abstract boolean isHasAttack();
+
+    public abstract boolean isHasEnergy();
 
     public abstract types.UNIT_TYPES getUnitType();
 

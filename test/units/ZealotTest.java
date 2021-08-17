@@ -1,6 +1,7 @@
 package units;
 
 
+import common.exceptions.energy_exception.EnergyException;
 import common.exceptions.skill_exception.SkillExceptions;
 import common.types.types;
 import org.junit.jupiter.api.Assertions;
@@ -31,5 +32,17 @@ public class ZealotTest {
             caughtSkillExceptions = true;
         }
         Assertions.assertTrue(caughtSkillExceptions, "Test zealot should not use skill");
+    }
+
+    @Test
+    public void testZealotShouldNotHaveEnergy() {
+        Protoss zealot = new Zealot();
+        boolean caughtEnergyExceptions = false;
+        try{
+            zealot.getEnergy();
+        } catch (EnergyException e){
+            caughtEnergyExceptions = true;
+        }
+        Assertions.assertTrue(caughtEnergyExceptions);
     }
 }

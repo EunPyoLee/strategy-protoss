@@ -1,6 +1,7 @@
 package units;
 
 
+import common.exceptions.energy_exception.EnergyException;
 import common.exceptions.skill_exception.SkillExceptions;
 import common.types.types;
 import org.junit.jupiter.api.Assertions;
@@ -33,5 +34,17 @@ public class ProbeTest {
             }
             Assertions.assertTrue(!caughtSkillExceptions);
         }
+    }
+
+    @Test
+    public void testProbeShouldNotHaveEnergy() {
+        Protoss probe = new Probe();
+        boolean caughtEnergyExceptions = false;
+        try{
+            probe.getEnergy();
+        } catch (EnergyException e){
+            caughtEnergyExceptions = true;
+        }
+        Assertions.assertTrue(caughtEnergyExceptions);
     }
 }

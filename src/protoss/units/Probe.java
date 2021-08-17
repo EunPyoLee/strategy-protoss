@@ -1,5 +1,6 @@
 package protoss.units;
 
+import common.exceptions.energy_exception.EnergyException;
 import common.interfaces.IAttack;
 import common.interfaces.ISkill;
 import common.types.types;
@@ -16,8 +17,10 @@ public class Probe extends Protoss {
         this.setName("Probe");
         this.setHP(20);
         this.setShield(20);
+        this.setEnergy(0);
         this.setHasAttack(true);
         this.setHasSkill(true);
+        this.setHasEnergy(false);
         this.setUnitType(types.UNIT_TYPES.MECHANICAL);
         this.setAttackType(types.ATTACK_TYPES.NORMAL);
         this.setAttackBehavior(new KineticBeam());
@@ -54,6 +57,11 @@ public class Probe extends Protoss {
     }
 
     @Override
+    protected void setHasEnergy(boolean hasEnergy){
+        this.hasEnergy = hasEnergy;
+    }
+
+    @Override
     protected void setUnitType(types.UNIT_TYPES ut){
         this.unitType = ut;
     }
@@ -61,6 +69,11 @@ public class Probe extends Protoss {
     @Override
     protected void setAttackType(types.ATTACK_TYPES at){
         this.attackType = at;
+    }
+
+    @Override
+    protected void setEnergy(int energy){
+        this.energy = energy;
     }
 
     @Override
@@ -84,6 +97,14 @@ public class Probe extends Protoss {
     }
 
     @Override
+    public int getEnergy() throws EnergyException {
+        if(!hasEnergy) {
+            throw new EnergyException.NullEnergy();
+        }
+        return energy;
+    }
+
+    @Override
     public int getShield(){
         return shield;
     }
@@ -99,6 +120,11 @@ public class Probe extends Protoss {
     }
 
     @Override
+    public boolean isHasEnergy(){
+        return hasEnergy;
+    }
+
+    @Override
     public types.UNIT_TYPES getUnitType(){
         return unitType;
     }
@@ -106,14 +132,5 @@ public class Probe extends Protoss {
     @Override
     public types.ATTACK_TYPES getAttackType(){
         return attackType;
-    }
-
-    @Override
-    public void selfIntro() {
-        System.out.printf("[Name]: %s\n", this.getName());
-        System.out.printf("[Shield/HP]: %d/%d\n", this.getShield(),this.getHP());
-        System.out.printf("[Unit Type]: %s\n", this.getUnitType());
-        this.attackIntro();
-        this.skillIntro();
     }
 }
